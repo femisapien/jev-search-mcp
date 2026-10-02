@@ -84,5 +84,8 @@ test('describeWebSearch appends the Jev guidance exactly once', () => {
   const once = describeWebSearch('Search the web.');
   assert.match(once, /^Search the web\.\n\n.*Jev Search/s);
   assert.match(once, /Reach for it first for web questions/);
+  // prompt.context is skipped for a person's plugins on Team/Enterprise (sec-default),
+  // so the description alone has to say when the MCP tool is the right call
+  assert.match(once, /jev_search MCP tool only when you must force sources or window/);
   assert.equal(describeWebSearch(once), once);
 });
